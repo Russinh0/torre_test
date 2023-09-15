@@ -16,10 +16,10 @@ async function addFav(body, userId) {
   }
 }
 
-async function getFavs(id, actualPage) {
+async function getFavs(userId, actualPage) {
   try {
     const favs = await GenomaFavs.findAll({
-      where: { userId: id },
+      where: { userId },
       limit: 10,
       offset: (actualPage - 1) * 10,
     });

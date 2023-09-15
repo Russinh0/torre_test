@@ -1,4 +1,5 @@
 import User from "../models/User.js";
+import { generateToken } from "../token/index.js";
 import payloadGen from "../utils/payloadGen.js";
 
 async function register(body) {
@@ -19,15 +20,16 @@ async function register(body) {
   }
 }
 
-async function login(body) {
+async function login(username, password) {
   try {
-    const { username, password } = body;
     const user = await User.findOne({
       where: { username },
     });
-    return user
-      ? payloadGen(null, "User login succesfully", 201)
-      : payloadGen(null, "This username isn't registered", 401);
+    if (!user) return payloadGen(null, "This username isn't registered", 401);
+    if (!(await user.validatePassword(password))) {
+      return payloadGen(null, "Incorrect password.", 401);
+    }
+    return payloadGen(generateToken(user), "User login succesfully", 201);
   } catch (e) {
     console.error("Error when trying to login:", error);
     return payloadGen(null, "Error when trying to login", 500);
