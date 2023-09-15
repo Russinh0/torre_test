@@ -1,10 +1,13 @@
+import React from "react";
+import Login from "./components/Login/Login.jsx";
+import { Route, Routes } from "react-router-dom";
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        TEST
-      </header>
-    </div>
+    <>
+      <Routes>
+        <Route path="/" element={<Login />} />
+      </Routes>
+    </>
   );
 }
 
