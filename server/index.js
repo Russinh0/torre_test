@@ -1,6 +1,6 @@
-"use strict";
 
 import express from "express";
+import './models/index.js'
 import db from "./db/index.js";
 import dotenv from "dotenv";
 dotenv.config();
