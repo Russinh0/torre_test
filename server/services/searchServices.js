@@ -6,7 +6,8 @@ import payloadGen from "../utils/payloadGen.js";
 async function getQueries(id) {
   try {
     const queries = await SearchQueries.findAll({ where: { id } });
-    return payloadGen(queries[0].queries, "", 200);
+    if(queries[0])return payloadGen(queries[0].queries, "", 200);
+    return payloadGen([],"",404)
   } catch (e) {
     console.error("Error when trying to get the past queries:", e);
     return payloadGen(null, "Error when trying to get the past queries", 500);
