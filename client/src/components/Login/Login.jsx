@@ -36,7 +36,7 @@ export default function Login() {
       switch (e.nativeEvent.submitter.id) {
         case "login":
           res = await axios.post("http://localhost:8080/api/user/login", { username, password });
-          console.log(res)
+          localStorage.setItem('token',`bearer ${res.data.payload}`)
           if(res){
             changeAlertState({ message: res.data.message, severity: "success" })
             return navigate('/search')
@@ -51,8 +51,8 @@ export default function Login() {
       }
     } catch (e) {
       console.log(e)
-      changeAlertState({ message: e.response.data.message || 'Error interno, intente más tarde...,', severity: "error" });
-
+      if(e.response)return changeAlertState({ message: e.response.data.message || 'Error interno, intente más tarde...,', severity: "error" });
+      changeAlertState({ message:'Internal error, try later...,', severity: "error" });
     }
   };
   const [passwordErrorState, changePasswordState] = React.useState(false);
