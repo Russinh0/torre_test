@@ -3,9 +3,10 @@ import SearchQueries from "../models/SearchQueries.js";
 import User from "../models/User.js";
 import payloadGen from "../utils/payloadGen.js";
 
-async function getQueries(id) {
+async function getQueries(userId) {
   try {
-    const queries = await SearchQueries.findAll({ where: { id } });
+    const queries = await SearchQueries.findAll({ where: { userId } });
+    console.log(queries)
     if(queries[0])return payloadGen(queries[0].queries, "", 200);
     return payloadGen([],"",404)
   } catch (e) {

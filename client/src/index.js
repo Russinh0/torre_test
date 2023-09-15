@@ -8,6 +8,9 @@ import {BrowserRouter as Router} from 'react-router-dom'
 const darkTheme = createTheme({
   palette: {
     mode: 'dark',
+    primary:{
+      main:'#cddc39'
+    }
   },
 });
 

@@ -14,7 +14,9 @@ async function postQuery(req, res) {
 
 async function getQueries(req, res) {
   try {
+    console.log(req.user.id)
     const data = await searchServices.getQueries(req.user.id);
+    console.log(data)
     return res.status(data[1]).json(data[0]);
   } catch (e) {
     console.error(e);
