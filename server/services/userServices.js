@@ -12,7 +12,7 @@ async function register(body) {
     });
     console.log(created);
     return created
-      ? payloadGen(null, "User registred succesfully", 204)
+      ? payloadGen(null, "User registred succesfully", 200)
       : payloadGen(null, "Username already exists", 404);
   } catch (error) {
     console.error("Error when trying to register:", error);

@@ -16,12 +16,12 @@ async function login(req, res) {
     const data = await userServices.login(username,password);
     if(data[0].payload){
       res.set('Authorization',`bearer ${data[0].payload}`)
-      return res.status(data[1]).json(data[0].message);
+      return res.status(data[1]).json(data[0]);
     }
-    else return res.status(data[1]).json(data[0].message);
+    else return res.status(data[1]).json(data[0]);
   } catch (e) {
     console.error(e);
-    return res.status(500).json({ body: "Internal error" });
+    return res.status(500).json({ message: "Internal error" });
   }
 }
 
