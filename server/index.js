@@ -8,7 +8,7 @@ import cors from 'cors'
 dotenv.config();
 
 const corsOptions={
-  origin:'http://localhost:3000',
+  origin:'https://torretest.vercel.app',
   methods:['GET', 'PUT', 'POST','DELETE'],
   allowedHeaders:['Content-Type', 'Authorization'],
   credentials:true
