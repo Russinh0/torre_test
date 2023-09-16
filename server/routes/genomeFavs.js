@@ -6,6 +6,6 @@ const router = express.Router();
 
 router.post("/addFav", validateAuth ,genomeFavsController.addFav);
 router.get("/getFavs", validateAuth ,genomeFavsController.getFavs);
-router.delete("/removeFav", validateAuth ,genomeFavsController.removeFav);
+router.delete("/removeFav/:username", validateAuth ,genomeFavsController.removeFav);
 
 export default router;

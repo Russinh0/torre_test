@@ -21,7 +21,7 @@ async function getFavs(userId, actualPage) {
     const favs = await GenomaFavs.findAll({
       where: { userId },
       limit: 10,
-      offset: (actualPage - 1) * 10,
+      offset: ((actualPage || 1) - 1) * 10,
     });
     return favs[0]
       ? payloadGen(favs, "", 201)

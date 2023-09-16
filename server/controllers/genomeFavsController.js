@@ -1,8 +1,8 @@
 import genomeFavsServices from "../services/genomeFavsServices.js";
 async function addFav(req, res) {
   try {
-    const { publicId } = req.body;
-    const data = await genomeFavsServices.addFav(publicId, req.user.id);
+    const data = await genomeFavsServices.addFav(req.body, req.user.id);
+    console.log(data,'controller')
     return res.status(data[1]).json(data[0]);
   } catch (e) {
     console.error(e);
@@ -23,7 +23,7 @@ async function getFavs(req, res) {
 
 async function removeFav(req, res) {
   try {
-    const data = await genomeFavsServices.removeFav(req.user.id);
+    const data = await genomeFavsServices.removeFav(req.params.ardaId);
     return res.status(data[1]).json(data[0]);
   } catch (e) {
     console.error(e);

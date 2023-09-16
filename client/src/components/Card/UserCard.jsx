@@ -1,14 +1,14 @@
 import { Avatar, Button, Container, Typography } from "@mui/material";
 import axios from "axios";
 import { useState } from "react";
-const UserProfile = ({ person }) => {
-  const [isFav, setFavVal] = useState(person.ardaId ? true : false);
-  const handleButton = async () => {
+const UserCard = ({ person }) => {
+  console.log('esto USER PROFILE')
+  const [isFav, setFavVal] = useState(person.isFav);
+  const handleFavButton = async () => {
     if (isFav) {
       try{
         const res = await axios.delete(
-          "http://localhost:8080/api/genomeFavs/removeFav",
-          { ardaId: person.ardaId },
+          `http://localhost:8080/api/genomeFavs/removeFav/${person.username}`,
           { headers: { Authorization: localStorage.getItem("token") } }
         );
         setFavVal(false);
@@ -18,10 +18,10 @@ const UserProfile = ({ person }) => {
       }
     } else {
       try{
-        const res = await axios.post(
+        await axios.post(
           "http://localhost:8080/api/genomeFavs/addFav",
           {
-            ardaId: person.ardaId,
+            username: person.username,
             name: person.name,
             imageUrl: person.imageUrl,
             professionalHeadline: person.professionalHeadline,
@@ -63,23 +63,33 @@ const UserProfile = ({ person }) => {
         {person.professionalHeadline}
       </Typography>
       <Container
-        sx={{ display: "flex", alignItems: "right", justifyContent: "right" }}
+        sx={{ display: "flex", alignItems: "right", justifyContent: "right",width:'100%' }}
       >
         <Button
-          onClick={() => handleButton()}
+          onClick={() => handleFavButton()}
           variant="outlined"
           color="primary"
-          sx={{ borderRadius: "10px" }}
+        
+          sx={{ borderRadius: "10px",backgroundColor:{} }}
         >
           {isFav ? (
-            <Typography sx={{ color: "" }}>Unfollow</Typography>
+            <Typography sx={{ color: "#B7245C" }}>Unfollow</Typography>
           ) : (
-            <Typography sx={{ color: "" }}>Follow</Typography>
+            <Typography>Follow</Typography>
           )}
+        </Button>
+        <Button
+          variant="outlined"
+          color="primary"
+          onClick={()=>window.open(`https://torre.ai/${person.username}`, "_blank")}
+          sx={{ borderRadius: "10px",marginLeft:'10px' }}
+        >
+            <Typography>Genome</Typography>
+
         </Button>
       </Container>
     </Container>
   );
 };
 
-export default UserProfile;
+export default UserCard;
