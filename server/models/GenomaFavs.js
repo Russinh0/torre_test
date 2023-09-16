@@ -4,7 +4,7 @@ import db from "../db/index.js";
 class GenomaFavs extends Model {}
 GenomaFavs.init(
   {
-    ardaId: {
+    username: {
       type: DataTypes.STRING,
       allowNull:false,
       unique:true

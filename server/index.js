@@ -17,9 +17,11 @@ const app = express();
 app.use(cors(corsOptions))
 app.use(express.json())
 app.use("/api", routes);
+const port= process.env.PORT || 8080
+
 
 db.sync({ force: false }).then(() => {
-  app.listen(process.env.PORT, () => {
-    console.log(`SERVER UP AT PORT ${process.env.PORT}`);
+  app.listen(port, () => {
+    console.log(`SERVER UP AT PORT ${port}`);
   });
 });

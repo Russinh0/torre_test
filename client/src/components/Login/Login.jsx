@@ -1,18 +1,15 @@
 import * as React from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Alert, Collapse, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
-const defaultTheme = createTheme();
+import {  useNavigate } from "react-router-dom";
 
 export default function Login() {
   const navigate = useNavigate()
@@ -39,7 +36,7 @@ export default function Login() {
           localStorage.setItem('token',`bearer ${res.data.payload}`)
           if(res){
             changeAlertState({ message: res.data.message, severity: "success" })
-            return navigate('/search')
+            return navigate('/')
           }
           break;
         case "register":

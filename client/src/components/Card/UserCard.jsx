@@ -1,10 +1,13 @@
 import { Avatar, Button, Container, Typography } from "@mui/material";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 const UserCard = ({ person }) => {
-  console.log('esto USER PROFILE')
   const [isFav, setFavVal] = useState(person.isFav);
+  useEffect(()=>{
+    setFavVal(person.isFav)
+  },[person.username])
   const handleFavButton = async () => {
+    console.log(isFav,person)
     if (isFav) {
       try{
         const res = await axios.delete(

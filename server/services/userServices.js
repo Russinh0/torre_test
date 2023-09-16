@@ -5,12 +5,11 @@ import payloadGen from "../utils/payloadGen.js";
 async function register(body) {
   try {
     const { username, password } = body;
-    console.log(username, password);
+    username=username.toLowerCase()
     const [_, created] = await User.findOrCreate({
       where: { username },
       defaults: { password },
     });
-    console.log(created);
     return created
       ? payloadGen(null, "User registred succesfully", 200)
       : payloadGen(null, "Username already exists", 404);

@@ -6,7 +6,6 @@ import payloadGen from "../utils/payloadGen.js";
 async function getQueries(userId) {
   try {
     const queries = await SearchQueries.findAll({ where: { userId } });
-    console.log(queries)
     if(queries[0])return payloadGen(queries[0].queries, "", 200);
     return payloadGen([],"",404)
   } catch (e) {
@@ -24,6 +23,7 @@ async function postQuery(userId, query) {
       newQueries.setUser(user);
       return payloadGen(null, "", 204);
     }
+    if(queries.queries.includes(query))return payloadGen(queries.queries, "", 200)
     const arrQueriesMutable = queries.queries.slice();
     if (arrQueriesMutable.length >= 10) {
       arrQueriesMutable.shift();
