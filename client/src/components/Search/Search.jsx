@@ -12,7 +12,7 @@ const SearchB = ({ props }) => {
     try {
       console.log(props.searchInput);
       await axios.post(
-        "http://localhost:8080/api/search/saveQuery",
+        "/api/search/saveQuery",
         { query: props.searchInput },
         { headers: { Authorization: localStorage.getItem("token") } }
       );
@@ -26,7 +26,7 @@ const SearchB = ({ props }) => {
     console.log(props);
     if (props.searchInput) pushQuery();
     axios
-      .get("http://localhost:8080/api/search/getRecentQueries", {
+      .get("/api/search/getRecentQueries", {
         headers: { Authorization: localStorage.getItem("token") },
       })
       .then((res) => {

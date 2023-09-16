@@ -23,21 +23,18 @@ const [totalPages,setTotalPages]=useState(0)
     setPage(value)
 }
 useEffect(()=>{
-    console.log(page)
     getSearch()
     .then(total=>makePagination(total))
 },[page])
   
   const getSearch=async ()=>{   
     try{
-        const res= await axios.post(`http://localhost:8080/api/genomeFavs/findByName/${page}`,{searchQuery:searchInput},{ headers: { Authorization: localStorage.getItem("token") } })
-        console.log(!res.data.payload.results.length)
+        const res= await axios.post(`api/genomeFavs/findByName/${page}`,{searchQuery:searchInput},{ headers: { Authorization: localStorage.getItem("token") } })
         if(!res.data.payload.results.length)setUserFavs([])
         setUserFavs(res.data.payload.results.map((obj) => ({
             ...obj,
             isFav: true,
           })))
-          console.log(res.data.payload)
           return res.data.payload.totalResults
     }
     catch(e){
@@ -52,10 +49,7 @@ useEffect(()=>{
       setUpdate(false)
       getSearch()
       .then(total=>{
-        console.log(total)
         makePagination(total)})
-        console.log(userFavs)
-      
     }
   },[toUpdate])
   return (

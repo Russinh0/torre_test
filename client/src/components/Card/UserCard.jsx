@@ -11,7 +11,7 @@ const UserCard = ({ person }) => {
     if (isFav) {
       try{
         const res = await axios.delete(
-          `http://localhost:8080/api/genomeFavs/removeFav/${person.username}`,
+          `/api/genomeFavs/removeFav/${person.username}`,
           { headers: { Authorization: localStorage.getItem("token") } }
         );
         setFavVal(false);
@@ -22,7 +22,7 @@ const UserCard = ({ person }) => {
     } else {
       try{
         await axios.post(
-          "http://localhost:8080/api/genomeFavs/addFav",
+          "/api/genomeFavs/addFav",
           {
             username: person.username,
             name: person.name,

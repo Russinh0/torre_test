@@ -32,7 +32,7 @@ export default function Login() {
     try {
       switch (e.nativeEvent.submitter.id) {
         case "login":
-          res = await axios.post("http://localhost:8080/api/user/login", { username, password });
+          res = await axios.post("/api/user/login", { username, password });
           localStorage.setItem('token',`bearer ${res.data.payload}`)
           if(res){
             changeAlertState({ message: res.data.message, severity: "success" })
@@ -40,14 +40,13 @@ export default function Login() {
           }
           break;
         case "register":
-          res = await axios.post("http://localhost:8080/api/user/register", { username, password });
+          res = await axios.post("/api/user/register", { username, password });
           if(res)changeAlertState({ message: res.data.message.message || "", severity: "success" })
           break;
         default:
           break;
       }
     } catch (e) {
-      console.log(e)
       if(e.response)return changeAlertState({ message: e.response.data.message || 'Error interno, intente más tarde...,', severity: "error" });
       changeAlertState({ message:'Internal error, try later...,', severity: "error" });
     }
