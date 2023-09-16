@@ -11,7 +11,7 @@ const UserCard = ({ person }) => {
     if (isFav) {
       try{
         const res = await axios.delete(
-          `/api/genomeFavs/removeFav/${person.username}`,
+          `https://torre-rest-api.onrender.com/api/genomeFavs/removeFav/${person.username}`,
           { headers: { Authorization: localStorage.getItem("token") } }
         );
         setFavVal(false);
@@ -22,7 +22,7 @@ const UserCard = ({ person }) => {
     } else {
       try{
         await axios.post(
-          "/api/genomeFavs/addFav",
+          "https://torre-rest-api.onrender.com/api/genomeFavs/addFav",
           {
             username: person.username,
             name: person.name,

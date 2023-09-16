@@ -29,7 +29,7 @@ useEffect(()=>{
   
   const getSearch=async ()=>{   
     try{
-        const res= await axios.post(`api/genomeFavs/findByName/${page}`,{searchQuery:searchInput},{ headers: { Authorization: localStorage.getItem("token") } })
+        const res= await axios.post(`https://torre-rest-api.onrender.com/api/genomeFavs/findByName/${page}`,{searchQuery:searchInput},{ headers: { Authorization: localStorage.getItem("token") } })
         if(!res.data.payload.results.length)setUserFavs([])
         setUserFavs(res.data.payload.results.map((obj) => ({
             ...obj,

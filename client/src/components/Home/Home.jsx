@@ -17,7 +17,7 @@ export default function Home() {
     let arrUsernames=[];
     try{
       await axios.post(
-        "/api/search/saveQuery",
+        "https://torre-rest-api.onrender.com/api/search/saveQuery",
         { query: searchInput },
         { headers: { Authorization: localStorage.getItem("token") } }
       );
@@ -27,7 +27,7 @@ export default function Home() {
     }
     try{
       const resFavs= await axios
-      .get(`/api/genomeFavs/getFavs/${false}`, {
+      .get(`https://torre-rest-api.onrender.com/api/genomeFavs/getFavs/${false}`, {
         headers: { Authorization: localStorage.getItem("token") },
         })
         arrUsernames= resFavs.data.payload.map((obj) => obj.username);
@@ -86,7 +86,7 @@ export default function Home() {
 
     if (!localStorage.getItem("token")) return;
     axios
-      .get("/api/search/getRecentQueries", {
+      .get("https://torre-rest-api.onrender.com/api/search/getRecentQueries", {
         headers: { Authorization: localStorage.getItem("token") },
       })
       .then((res) => {

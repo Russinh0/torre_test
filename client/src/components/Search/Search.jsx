@@ -12,7 +12,7 @@ const SearchB = ({ props }) => {
     try {
       console.log(props.searchInput);
       await axios.post(
-        "/api/search/saveQuery",
+        "https://torre-rest-api.onrender.com/api/search/saveQuery",
         { query: props.searchInput },
         { headers: { Authorization: localStorage.getItem("token") } }
       );
@@ -26,7 +26,7 @@ const SearchB = ({ props }) => {
     console.log(props);
     if (props.searchInput) pushQuery();
     axios
-      .get("/api/search/getRecentQueries", {
+      .get("https://torre-rest-api.onrender.com/api/search/getRecentQueries", {
         headers: { Authorization: localStorage.getItem("token") },
       })
       .then((res) => {

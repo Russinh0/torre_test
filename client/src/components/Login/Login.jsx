@@ -32,7 +32,7 @@ export default function Login() {
     try {
       switch (e.nativeEvent.submitter.id) {
         case "login":
-          res = await axios.post("/api/user/login", { username, password });
+          res = await axios.post("https://torre-rest-api.onrender.com/api/user/login", { username, password });
           localStorage.setItem('token',`bearer ${res.data.payload}`)
           if(res){
             changeAlertState({ message: res.data.message, severity: "success" })
@@ -40,7 +40,7 @@ export default function Login() {
           }
           break;
         case "register":
-          res = await axios.post("/api/user/register", { username, password });
+          res = await axios.post("https://torre-rest-api.onrender.com/api/user/register", { username, password });
           if(res)changeAlertState({ message: res.data.message.message || "", severity: "success" })
           break;
         default:
