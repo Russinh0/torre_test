@@ -5,9 +5,8 @@ import payloadGen from "../utils/payloadGen.js";
 async function register(body) {
   try {
     const { username, password } = body;
-    username=username.toLowerCase()
     const [_, created] = await User.findOrCreate({
-      where: { username },
+      where: { username:username.toLowerCase() },
       defaults: { password },
     });
     return created
@@ -22,7 +21,7 @@ async function register(body) {
 async function login(username, password) {
   try {
     const user = await User.findOne({
-      where: { username },
+      where: { username:username.toLowerCase() },
     });
     if (!user) return payloadGen(null, "This username isn't registered", 401);
     if (!(await user.validatePassword(password))) {

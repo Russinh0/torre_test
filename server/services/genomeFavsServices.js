@@ -62,8 +62,6 @@ async function removeFav(username) {
 
 async function search(searchQuery,actualPage, userId) {
   try {
-    console.log(((actualPage || 1) - 1) * 10,'esto es la cuenta')
-    console.log(actualPage,'esto es la actualPage')
     const results = await GenomaFavs.findAll({
       where: {
         userId,
@@ -75,7 +73,6 @@ async function search(searchQuery,actualPage, userId) {
       limit: 10,
       offset: ((actualPage || 1) - 1) * 10
     });
-    console.log(results,'esto es results')
     const totalResults = await GenomaFavs.count({
       where: {
         userId,
