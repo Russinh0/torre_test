@@ -7,7 +7,7 @@ async function addFav(body, userId) {
     const user = await User.findByPk(userId);
     if (!user)
       return payloadGen(null, "Error trying to find your user...", 500);
-    const genFav = await GenomaFavs.create({ publicId: body });
+    const genFav = await GenomaFavs.create(body);
     user.addGenomaFavs(genFav);
     return payloadGen(null, "Fav added succesfully", 204);
   } catch (error) {
@@ -32,9 +32,9 @@ async function getFavs(userId, actualPage) {
   }
 }
 
-async function removeFav(id) {
+async function removeFav(ardaId) {
   try {
-    const isDeleted = await GenomaFavs.destroy({ where: { id } });
+    const isDeleted = await GenomaFavs.destroy({ where: { ardaId } });
     return isDeleted
       ? payloadGen(null, "Fav removed succesfully", 200)
       : payloadGen(null, "Fav was already removed", 404);

@@ -11,6 +11,7 @@ SearchQueries.init(
   {
     sequelize: db,
     modelName: "searchQueries",
+    timestamps:false
   }
 );
 
