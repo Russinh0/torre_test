@@ -78,7 +78,9 @@ export default function Home() {
   };
   useEffect(()=>{
     console.log(toUpdate)
-    if(toUpdate)getData()
+    if(toUpdate){
+      setUpdate(false)
+      getData()}
   },[toUpdate])
   useEffect(() => {
 
@@ -105,7 +107,7 @@ export default function Home() {
         alignItems: "center",
       }}
     >
-      <SearchB props={{setSearchInput,recentSearches, setUpdate}} />
+      <SearchB props={{setSearchInput,recentSearches,toUpdate, setUpdate,searchInput}} />
       
       {results?.length ? (
         <Container
